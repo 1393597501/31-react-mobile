@@ -13,7 +13,6 @@ class MyLayout extends React.Component {
   }
 
   render() {
-      console.log(this.props);
     return (
     <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar
@@ -31,7 +30,7 @@ class MyLayout extends React.Component {
             onPress={() => {this.props.history.push('/') }}
   
           >
-            {this.props.children}
+           {this.props.match.url==="/"?this.props.children:null}
           </TabBar.Item>
           <TabBar.Item
             icon={ <span className="iconfont icon-gouwuche"/> }
@@ -43,7 +42,7 @@ class MyLayout extends React.Component {
             onPress={() => {this.props.history.push('/Cart') }}
      
           >
-          {this.props.children}
+          {this.props.match.url==="/Cart"?this.props.children:null}
           </TabBar.Item>
           <TabBar.Item
             icon={ <span className="iconfont icon-weibiaoti2fuzhi12" /> }
@@ -53,7 +52,7 @@ class MyLayout extends React.Component {
             selected={this.props.match.url==="/Mine"}
             onPress={() => {this.props.history.push('/Mine') }}
           >
-         {this.props.children}
+           {this.props.match.url==="/Mine"?this.props.children:null}
           </TabBar.Item>
         </TabBar>
       </div>
