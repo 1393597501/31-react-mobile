@@ -13,6 +13,7 @@ class MyLayout extends React.Component {
   }
 
   render() {
+      console.log(this.props);
     return (
     <div style={{ position: 'fixed', height: '100%', width: '100%', top: 0 }}>
         <TabBar
@@ -26,15 +27,11 @@ class MyLayout extends React.Component {
             icon={<span className="iconfont icon-home" />}
             selectedIcon={<span className="iconfont icon-home" />
             }
-            selected={this.state.selectedTab === 'blueTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'blueTab',
-              });
-            }}
+            selected={this.props.match.url==="/"}
+            onPress={() => {this.props.history.push('/') }}
   
           >
-            1
+            {this.props.children}
           </TabBar.Item>
           <TabBar.Item
             icon={ <span className="iconfont icon-gouwuche"/> }
@@ -42,29 +39,21 @@ class MyLayout extends React.Component {
             title="Koubei"
             key="Koubei"
             badge={'1'}
-            selected={this.state.selectedTab === 'redTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'redTab',
-              });
-            }}
+            selected={this.props.match.url==="/Cart"}
+            onPress={() => {this.props.history.push('/Cart') }}
      
           >
-         2
+          {this.props.children}
           </TabBar.Item>
           <TabBar.Item
             icon={ <span className="iconfont icon-weibiaoti2fuzhi12" /> }
             selectedIcon={ <span className="iconfont icon-weibiaoti2fuzhi12" /> }
             title="我的"
             key="Mine"
-            selected={this.state.selectedTab === 'greenTab'}
-            onPress={() => {
-              this.setState({
-                selectedTab: 'greenTab',
-              });
-            }}
+            selected={this.props.match.url==="/Mine"}
+            onPress={() => {this.props.history.push('/Mine') }}
           >
-       3
+         {this.props.children}
           </TabBar.Item>
         </TabBar>
       </div>
