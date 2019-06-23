@@ -31,7 +31,7 @@ class Home extends Component {
                         infinite
                         >
                         {this.state.sliderlist.map(val => (
-                            <a key={val.id} href="javascript:;" onClick={()=>this.props.history.push("/GoodsDetail/:"+val.id)} style={{ display: 'inline-block',
+                            <a key={val.id} href="javascript:;" onClick={()=>this.props.history.push("/GoodsDetail/"+val.id)} style={{ display: 'inline-block',
                              width: '100%', height: this.state.imgHeight }}>
                             <img
                                 src={val.img_url}
