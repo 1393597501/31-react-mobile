@@ -11,4 +11,8 @@ axios.interceptors.response.use(function (response) {
     return Promise.reject(error);
   });
 
+  // 轮播图和推荐商品
 export const getGoods=()=>axios.get("goods/gettopdata/goods")
+
+// 首页列表
+export const getGoodsGroup =() => axios.get("goods/getgoodsgroup")
