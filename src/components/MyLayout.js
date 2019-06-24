@@ -1,5 +1,7 @@
 import React from 'react';
+import {connect} from "react-redux";
 import { TabBar } from 'antd-mobile';
+
 
 
 class MyLayout extends React.Component {
@@ -35,9 +37,9 @@ class MyLayout extends React.Component {
           <TabBar.Item
             icon={ <span className="iconfont icon-gouwuche"/> }
             selectedIcon={ <span className="iconfont icon-gouwuche"/> }
-            title="Koubei"
-            key="Koubei"
-            badge={'1'}
+            title="购物车"
+            key="Cart"
+            badge={this.props.cartLength}
             selected={this.props.match.url==="/Cart"}
             onPress={() => {this.props.history.push('/Cart') }}
      
@@ -60,4 +62,11 @@ class MyLayout extends React.Component {
   }
 }
 
-export default MyLayout;
+const mapStateToProps = (state)=>{
+  return{
+     cartLength:state.cartReducer.cartList.length
+  }
+ 
+}
+
+export default connect(mapStateToProps,null)(MyLayout);

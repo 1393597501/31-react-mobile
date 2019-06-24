@@ -1,7 +1,8 @@
 import React,{Fragment,Component} from 'react'
-import { NavBar, Icon } from 'antd-mobile';
-import {getGoodsInfo} from '../api'
-import { Carousel } from 'antd-mobile';
+import { NavBar, Icon,Carousel,Toast} from 'antd-mobile';
+import {getGoodsInfo} from '../api';
+import {connect} from "react-redux";
+import  {cart_add} from "../store/actionCreator";
 class GoodsDetail extends Component {
     state = { 
         imglist:[],
@@ -30,6 +31,7 @@ class GoodsDetail extends Component {
                     onLeftClick={() =>this.props.history.go(-1)}
                     >商品列表
                 </NavBar>   
+                    <h1>{this.props.num}</h1>
                     {/* 轮播图开始 */}
                     <Carousel
                         autoplay={false}
@@ -117,6 +119,7 @@ class GoodsDetail extends Component {
                                   img{
                                       height: auto;
                                       max-width: 100%;
+                                      margin-bottom:45px;
                                   }
                               }
                            }     
@@ -130,12 +133,12 @@ class GoodsDetail extends Component {
                             <span className="iconfont icon-kefu"></span>
                             <p>客服</p>
                         </div>
-                        <div className="btm-item btm_cart">
-                            <span className="iconfont icon-gouwuche"></span>
+                        <div className="btm-item btm_cart" onClick={()=>this.props.history.push('/Cart')}>
+                            <span className="iconfont icon-gouwuche"></span> 
                             <p>购物车</p>
-                            <div className="badge">2</div>
+                            <div className="badge" style={{display:this.props.cartLength?"block":"none"}}>{this.props.cartLength}</div>
                         </div>
-                        <div className="btm-item btm_cart_add">
+                        <div className="btm-item btm_cart_add" onClick={()=>this.props.handleCartAdd(this.state.goodsinfo)}>
                             加入购物车
                         </div>
                         <div className="btm-item btm_buy">
@@ -195,5 +198,19 @@ class GoodsDetail extends Component {
         );
     }
 }
- 
-export default GoodsDetail;
+ const mapStateToProps = (state)=>{
+     return{
+        cartLength:state.cartReducer.cartList.length
+     }
+    
+ }
+
+ const mapDispatch=(dispatch)=>{
+     return{
+        handleCartAdd:(goodsobj)=>{
+            Toast.info('添加成功', 2, null, false);
+            dispatch(cart_add(goodsobj));
+        }
+     }
+ }
+export default connect(mapStateToProps,mapDispatch)(GoodsDetail);
